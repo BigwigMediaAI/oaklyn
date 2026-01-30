@@ -32,7 +32,6 @@ import img13 from "../assets/client13.png";
 import img14 from "../assets/client14.png";
 import img15 from "../assets/client15.png";
 import img16 from "../assets/client16.png";
-// import { propertyData } from "./data/propertyData";
 import project5 from "../assets/projects/project_1.jpg";
 import MiniNavbar from "../components/Mininavbar";
 import PropertyCategoriesHover from "../components/home/PropertyCategory";
