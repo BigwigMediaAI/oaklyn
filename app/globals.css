@@ -1,6 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Chewy&display=swap");
+
 @import "tailwindcss";
 
+/* =====================
+   CSS VARIABLES
+===================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* BRAND COLORS */
+  --primary-bg: #1f3d2b; /* Deep Forest Green */
+  --secondary-bg: #ffffff; /* Light Background */
+
+  --primary-color: #c9a24d; /* Luxury Gold */
+  --secondary-color: #8fbfa3; /* Sage Green */
+
+  /* TEXT COLORS */
+  --text-primary: #1e1e1e; /* Main Text */
+  --text-light: #1d1d1d; /* White Text */
+  --text-muted: #292828; /* Muted Text */
+
+  /* UI */
+  --border-color: #d6e2da;
+  --hover-bg: #163023;
+
+  /* FONTS */
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+.dark {
+  /* BACKGROUNDS */
+  --primary-bg: #1f3d2b; /* Dark Forest */
+  --secondary-bg: #050807; /* Near Black */
+
+  /* BRAND COLORS (slightly brighter for contrast) */
+  --primary-color: #e0b75e; /* Gold Glow */
+  --secondary-color: #9fd6b8; /* Lighter Sage */
+
+  /* TEXT COLORS */
+  --text-primary: #f5f7f6; /* Main Light Text */
+  --text-light: #ffffff; /* Pure White */
+  --text-muted: #9fb7ab; /* Muted on Dark */
+
+  /* UI */
+  --border-color: #1f3a2c;
+  --hover-bg: #143326;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Base Button */
+.click-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 120px;
+  padding: 0 18px;
+  height: 44px;
+
+  border: 1px solid;
+  border-radius: 5px;
+
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap; /* 🔑 prevent breaking */
+
+  color: #979695;
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: all 0.35s ease;
+  box-sizing: border-box;
+}
+
+/* STYLE 5 */
+.btn-style5 {
+  border-color: #979695;
+  color: #979695;
+  box-shadow: 0.3em 0.3em 0 #e0bd4d;
+}
+
+.btn-style5:hover {
+  box-shadow: -0.3em -0.3em 0 #979695;
+  background-color: #e0bd4d;
+  border-color: #e0bd4d;
+  color: #ffffff;
 }
