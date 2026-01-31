@@ -80,25 +80,25 @@ export default function Navbar() {
               {productOpen && (
                 <div className="absolute top-full left-0 bg-white w-52 border border-white/10 shadow-xl">
                   <Link
-                    href="/properties/buy"
+                    href="/buy-property"
                     className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
                   >
                     Buy Property
                   </Link>
                   <Link
-                    href="/properties/sell"
+                    href="/sell-property"
                     className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
                   >
                     Sell Property
                   </Link>
                   <Link
-                    href="/properties/rent"
+                    href="/rent-property"
                     className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
                   >
                     Rent Property
                   </Link>
                   <Link
-                    href="/properties/lease"
+                    href="/lease-property"
                     className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
                   >
                     Lease Property
@@ -109,7 +109,7 @@ export default function Navbar() {
 
             {[
               { name: "Projects", link: "/projects" },
-              { name: "Blogs", link: "/blogs" },
+              { name: "Blogs", link: "/blog" },
               { name: "Contact", link: "/contact" },
             ].map((item) => (
               <li key={item.name}>
@@ -149,7 +149,7 @@ export default function Navbar() {
             {/* HAMBURGER */}
             <button
               onClick={() => setOpen(!open)}
-              className={scrolled ? "text-[var(--text-light)]" : "text-white"}
+              className={scrolled ? "text-white" : "text-white"}
             >
               {open ? <X size={32} /> : <Menu size={32} />}
             </button>
@@ -206,16 +206,16 @@ export default function Navbar() {
 
             {mobilePropOpen && (
               <div className="ml-4 flex flex-col gap-4 text-base text-gray-300">
-                <Link href="/properties/buy" onClick={() => setOpen(false)}>
+                <Link href="/buy-property" onClick={() => setOpen(false)}>
                   Buy Property
                 </Link>
-                <Link href="/properties/sell" onClick={() => setOpen(false)}>
+                <Link href="/sell-property" onClick={() => setOpen(false)}>
                   Sell Property
                 </Link>
-                <Link href="/properties/rent" onClick={() => setOpen(false)}>
+                <Link href="/rent-property" onClick={() => setOpen(false)}>
                   Rent Property
                 </Link>
-                <Link href="/properties/lease" onClick={() => setOpen(false)}>
+                <Link href="/lease-property" onClick={() => setOpen(false)}>
                   Lease Property
                 </Link>
               </div>
