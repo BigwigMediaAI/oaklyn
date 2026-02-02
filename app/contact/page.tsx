@@ -9,7 +9,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Footer from "../components/Footer";
-import EnquiryForm from "../components/EnquireForm";
+import EnquiryForm from "../components/EnquiryForm";
 import MiniNavbar from "../components/Mininavbar";
 
 const Contact = () => {

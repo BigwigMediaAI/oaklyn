@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import popup from "../assets/h8_pic5.jpg";
-import EnquiryForm from "./EnquireForm";
+import EnquiryForm from "./EnquiryForm";
 
 interface PopupFormProps {
   open: boolean;

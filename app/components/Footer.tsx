@@ -69,22 +69,22 @@ export default function Footer() {
               <h4 className="font-heading text-lg mb-4">Quick Links</h4>
               <ul className="space-y-2 font-body text-sm text-gray-300">
                 <li>
-                  <Link href="#" className="hover:text-white">
+                  <Link href="/about" className="hover:text-white">
                     About
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white">
+                  <Link href="/project" className="hover:text-white">
                     Projects
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white">
+                  <Link href="/blog" className="hover:text-white">
                     Blogs
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white">
+                  <Link href="/contact" className="hover:text-white">
                     Contacts
                   </Link>
                 </li>
@@ -101,7 +101,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white">
+                  <Link href="/sell-property" className="hover:text-white">
                     Sell Property
                   </Link>
                 </li>
@@ -121,7 +121,7 @@ export default function Footer() {
         </div>
 
         {/* ================= BOTTOM BAR ================= */}
-        <div className="w-11/12 md:w-5/6 mx-auto py-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
+        <div className="w-11/12 md:w-5/6 mx-auto py-6 mb-10 md:mb-0 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400">
           <div>
             <p>© {new Date().getFullYear()} Oaklyn. All rights reserved.</p>
           </div>

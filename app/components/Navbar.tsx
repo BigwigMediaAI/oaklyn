@@ -9,6 +9,21 @@ import { usePathname } from "next/navigation";
 import ButtonFill from "./Button";
 import PopupForm from "./Popup";
 import ThemeSliderToggle from "./Theme-toggle";
+import LanguageSelector from "./LanguageSelector";
+
+declare global {
+  interface Window {
+    googleTranslateElementInit: () => void;
+    google: {
+      translate: {
+        TranslateElement: new (
+          options: { pageLanguage: string; autoDisplay?: boolean },
+          elementId: string,
+        ) => void;
+      };
+    };
+  }
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,6 +37,30 @@ export default function Navbar() {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          autoDisplay: false,
+        },
+        "google_translate_element",
+      );
+    };
+    const loadGoogleTranslateScript = () => {
+      if (!window.googleTranslateElementInit) {
+        const script = document.createElement("script");
+        script.src =
+          "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        script.async = true;
+        document.body.appendChild(script);
+        window.googleTranslateElementInit = googleTranslateElementInit;
+      }
+    };
+
+    loadGoogleTranslateScript();
   }, []);
 
   return (
@@ -80,7 +119,7 @@ export default function Navbar() {
               {productOpen && (
                 <div className="absolute top-full left-0 bg-white w-52 border border-white/10 shadow-xl">
                   <Link
-                    href="/buy-property"
+                    href="#buy-property"
                     className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
                   >
                     Buy Property
@@ -92,13 +131,13 @@ export default function Navbar() {
                     Sell Property
                   </Link>
                   <Link
-                    href="/rent-property"
+                    href="#rent-property"
                     className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
                   >
                     Rent Property
                   </Link>
                   <Link
-                    href="/lease-property"
+                    href="#lease-property"
                     className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
                   >
                     Lease Property
@@ -131,6 +170,9 @@ export default function Navbar() {
 
           {/* RIGHT — PHONE */}
           <div className="hidden lg:flex gap-5 items-center">
+            <div className="notranslate">
+              <LanguageSelector />
+            </div>
             <ThemeSliderToggle />
             {/* GET IN TOUCH BUTTON */}
             <ButtonFill
@@ -143,6 +185,9 @@ export default function Navbar() {
 
           {/* MOBILE TOGGLE */}
           <div className="lg:hidden flex items-center gap-4 z-[60]">
+            <div className="notranslate">
+              <LanguageSelector />
+            </div>
             {/* THEME TOGGLE (MOBILE) */}
             <ThemeSliderToggle />
 
@@ -206,16 +251,16 @@ export default function Navbar() {
 
             {mobilePropOpen && (
               <div className="ml-4 flex flex-col gap-4 text-base text-gray-300">
-                <Link href="/buy-property" onClick={() => setOpen(false)}>
+                <Link href="#buy-property" onClick={() => setOpen(false)}>
                   Buy Property
                 </Link>
                 <Link href="/sell-property" onClick={() => setOpen(false)}>
                   Sell Property
                 </Link>
-                <Link href="/rent-property" onClick={() => setOpen(false)}>
+                <Link href="#rent-property" onClick={() => setOpen(false)}>
                   Rent Property
                 </Link>
-                <Link href="/lease-property" onClick={() => setOpen(false)}>
+                <Link href="#lease-property" onClick={() => setOpen(false)}>
                   Lease Property
                 </Link>
               </div>
@@ -240,6 +285,7 @@ export default function Navbar() {
             </div>
           </nav>
         </aside>
+        <div id="google_translate_element" className="hidden" />
       </div>
     </>
   );

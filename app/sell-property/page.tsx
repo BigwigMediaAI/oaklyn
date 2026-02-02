@@ -10,10 +10,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Footer from "../components/Footer";
 import MiniNavbar from "../components/Mininavbar";
-import EnquiryForm from "../components/EnquireForm";
 import CTASection from "../components/CTASection";
 import SellerFAQ from "../components/SellerFaq";
 import PopupForm from "../components/Popup";
+import EnquiryForm from "../components/EnquiryForm";
 
 const SellProperty = () => {
   const [openForm, setOpenForm] = useState(false);
