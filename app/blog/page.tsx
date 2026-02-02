@@ -170,7 +170,7 @@ export default function Blog() {
               {currentBlogs.map((blog) => (
                 <Link
                   key={blog._id}
-                  href={`/blogs/${blog.slug}`}
+                  href={`/blog/${blog.slug}`}
                   className="
                     group
                     rounded-2xl overflow-hidden
