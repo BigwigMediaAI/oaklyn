@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import logo from "../assets/4.png";
-import { Gauge, Notebook, Users } from "lucide-react";
+import { Building, Gauge, Notebook, Users } from "lucide-react";
 import Cookies from "js-cookie";
 
 export default function AdminLayout({
@@ -21,6 +21,11 @@ export default function AdminLayout({
     { icon: <Gauge size={18} />, label: "Dashboard", to: "/admin" },
     { icon: <Users size={18} />, label: "Leads", to: "/admin/lead" },
     { icon: <Notebook size={18} />, label: "Blogs", to: "/admin/blogs" },
+    {
+      icon: <Building size={18} />,
+      label: "Featured Property",
+      to: "/admin/featured",
+    },
   ];
 
   const handleLogout = () => {
