@@ -90,3 +90,39 @@
   border-color: #e0bd4d;
   color: #ffffff;
 }
+
+/* 🔴 Hide Google Translate top banner */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+/* 🔴 Remove space added by Google Translate */
+body {
+  top: 0 !important;
+}
+
+/* 🔴 Hide Google Translate dropdown iframe */
+iframe.goog-te-menu-frame {
+  display: none !important;
+}
+
+/* 🔴 Hide Google branding text */
+.goog-logo-link {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  font-size: 0 !important;
+}
+
+/* 🔴 Prevent text flicker */
+.skiptranslate {
+  display: none !important;
+}
+.language-selector {
+  -webkit-appearance: none; /* Chrome, Safari */
+  -moz-appearance: none; /* Firefox */
+  appearance: none; /* Standard */
+  background-image: none !important;
+}
