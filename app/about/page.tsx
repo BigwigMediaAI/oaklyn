@@ -25,7 +25,7 @@ import CTASection from "../components/CTASection";
 const features = [
   {
     title: "Fresh Booking",
-    icon: Building2, // New projects & developers
+    icon: Building2, // New projects 
     image: img1,
     points: [
       "Direct bookings with top developers",
