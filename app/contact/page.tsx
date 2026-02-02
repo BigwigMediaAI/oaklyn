@@ -12,6 +12,7 @@ import Footer from "../components/Footer";
 import EnquiryForm from "../components/EnquiryForm";
 import MiniNavbar from "../components/Mininavbar";
 
+
 const Contact = () => {
   /* ================= AOS INIT ================= */
   useEffect(() => {
