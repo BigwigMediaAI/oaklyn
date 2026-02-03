@@ -109,17 +109,14 @@ export default function Navbar() {
               onMouseEnter={() => setProductOpen(true)}
               onMouseLeave={() => setProductOpen(false)}
             >
-              <Link
-                href="/properties"
-                className="flex items-center gap-1 py-10 transition hover:text-[var(--primary-color)]"
-              >
+              <li className="flex items-center gap-1 py-10 transition hover:text-[var(--primary-color)]">
                 Properties <ChevronDown size={16} />
-              </Link>
+              </li>
 
               {productOpen && (
                 <div className="absolute top-full left-0 bg-white w-52 border border-white/10 shadow-xl">
                   <Link
-                    href="#buy-property"
+                    href="/buy-property"
                     className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
                   >
                     Buy Property

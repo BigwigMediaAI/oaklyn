@@ -8,6 +8,7 @@ const Dashboard = () => {
   const router = useRouter();
   const [counts, setCounts] = useState({
     leads: 0,
+    properties: 0,
   });
 
   useEffect(() => {
@@ -16,10 +17,14 @@ const Dashboard = () => {
       fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/lead/all`).then((r) =>
         r.json(),
       ),
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/property`).then((r) =>
+        r.json(),
+      ),
     ])
-      .then(([leads]) => {
+      .then(([leads, properties]) => {
         setCounts({
           leads: Array.isArray(leads) ? leads.length : 0,
+          properties: typeof properties === "object" ? properties.total : 0,
         });
       })
 
@@ -28,7 +33,10 @@ const Dashboard = () => {
       });
   }, [router]);
 
-  const cards = [{ title: "Leads", icon: <FaUsers />, count: counts.leads }];
+  const cards = [
+    { title: "Leads", icon: <FaUsers />, count: counts.leads },
+    { title: "Properties", icon: <FaBuilding />, count: counts.properties },
+  ];
 
   return (
     <section className="px-4 py-8 space-y-10">

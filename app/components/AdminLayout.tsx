@@ -1,5 +1,5 @@
 "use client";
-import { FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa";
+import { FaBars, FaTimes, FaSignOutAlt, FaBuilding } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -25,6 +25,11 @@ export default function AdminLayout({
       icon: <Building size={18} />,
       label: "Featured Property",
       to: "/admin/featured",
+    },
+    {
+      icon: <FaBuilding size={18} />,
+      label: "Property",
+      to: "/admin/property",
     },
   ];
 
