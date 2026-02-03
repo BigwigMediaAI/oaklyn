@@ -33,7 +33,6 @@ interface PropertyData {
   googleMapUrl: string;
   videoLink: string;
   brochure?: string;
-  featuredThumbnail?: string; // ⭐ NEW
   images: string[];
   builder: string;
   metatitle?: string;
@@ -82,11 +81,6 @@ export default function PropertyForm({
   const [loading, setLoading] = useState(false); // 🔹 loader
   const [brochureFile, setBrochureFile] = useState<File | null>(null);
   const [removeBrochure, setRemoveBrochure] = useState(false);
-  const [featuredThumbnailFile, setFeaturedThumbnailFile] =
-    useState<File | null>(null);
-  const [existingFeaturedThumbnail, setExistingFeaturedThumbnail] = useState<
-    string | null
-  >(null);
 
   useEffect(() => {
     if (property) {
@@ -114,7 +108,6 @@ export default function PropertyForm({
       });
 
       setExistingImages(property.images || []);
-      setExistingFeaturedThumbnail(property.featuredThumbnail || null);
       setBrochureFile(null);
       setRemoveBrochure(false);
     }
@@ -158,14 +151,6 @@ export default function PropertyForm({
       setBrochureFile(e.target.files[0]);
       // If user selects a new brochure, do not mark the old one for removal explicitly
       setRemoveBrochure(false);
-    }
-  };
-
-  const handleFeaturedThumbnailChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    if (e.target.files && e.target.files[0]) {
-      setFeaturedThumbnailFile(e.target.files[0]);
     }
   };
 
@@ -216,18 +201,13 @@ export default function PropertyForm({
         data.append("brochure", "");
       }
 
-      // 🔹 Featured thumbnail
-      if (featuredThumbnailFile) {
-        data.append("featuredThumbnail", featuredThumbnailFile);
-      }
-
       const url = property
-        ? `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${property.slug}`
-        : `${process.env.NEXT_PUBLIC_API_BASE}/api/property`;
+        ? `${process.env.NEXT_PUBLIC_API_BASE}/property/${property.slug}`
+        : `${process.env.NEXT_PUBLIC_API_BASE}/property`;
 
       // ❌ DO NOT set multipart headers manually
       if (property) {
-        await axios.put(url, data);
+        await axios.patch(url, data);
       } else {
         await axios.post(url, data);
       }
@@ -522,27 +502,6 @@ export default function PropertyForm({
           type="file"
           accept="application/pdf"
           onChange={handleBrochureChange}
-          className="mt-2"
-        />
-      </div>
-
-      {/* Featured Thumbnail Upload */}
-      <div className="mt-4">
-        <label className="block font-medium mb-2">Property Images</label>
-        {existingFeaturedThumbnail && (
-          <div className="mb-2">
-            <p className="text-sm text-gray-500 mb-1">Current Thumbnail:</p>
-            <img
-              src={existingFeaturedThumbnail}
-              alt="Featured Thumbnail"
-              className="w-32 h-32 object-cover rounded-lg"
-            />
-          </div>
-        )}
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFeaturedThumbnailChange}
           className="mt-2"
         />
       </div>

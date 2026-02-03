@@ -43,27 +43,6 @@ interface Property {
   builder?: string;
 }
 
-// const staticLocations = [
-//   "Select Location",
-//   "DLF Phase 1",
-//   "DLF Phase 2",
-//   "DLF Phase 3",
-//   "DLF Phase 4",
-//   "DLF Phase 5",
-//   "Sushant Lok 1",
-//   "Sushant Lok 2",
-//   "Sushant Lok 3",
-//   "Sushant Lok 4",
-//   "Sushant Lok 5",
-//   "MG Road",
-//   "Golf Course Road",
-//   "Golf Course Ext. Road",
-//   "Sector 77 Gurugram Haryana",
-//   "Sector 76 Gurugram Haryana",
-//   "Sector 102 Gurugram Haryana",
-//   "Sector 59 Gurugram Haryana",
-// ];
-
 export default function BuyPageContent() {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
@@ -329,9 +308,9 @@ export default function BuyPageContent() {
 
       {/* PROPERTY LIST */}
       <section className="py-16 bg-[var(--secondary-bg)]">
-        <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
-          {/* LEFT: PROPERTY GRID */}
-          <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+          {/* ================= LEFT: PROPERTY GRID ================= */}
+          <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             {loading && <PageLoader />}
 
             {!loading &&
@@ -339,10 +318,10 @@ export default function BuyPageContent() {
               filteredProperties.map((property) => (
                 <div
                   key={property._id}
-                  className="group rounded-3xl overflow-hidden bg-[var(--secondary-bg)] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition"
+                  className="group h-[420px] flex flex-col rounded-3xl overflow-hidden bg-[var(--secondary-bg)] border border-[var(--border-color)] shadow-sm hover:shadow-xl transition"
                 >
                   {/* IMAGE */}
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-56 overflow-hidden">
                     <Image
                       src={property.images?.[0] || "/placeholder.jpg"}
                       alt={property.title}
@@ -356,12 +335,12 @@ export default function BuyPageContent() {
                   </div>
 
                   {/* CONTENT */}
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <h3 className="font-[var(--font-heading)] text-lg text-[var(--text-primary)] uppercase mb-1 line-clamp-1">
                       {property.title}
                     </h3>
 
-                    <p className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-3">
+                    <p className="flex items-center gap-2 text-sm text-[var(--text-muted)] mb-3 line-clamp-1">
                       <MapPin size={16} /> {property.location}
                     </p>
 
@@ -383,11 +362,14 @@ export default function BuyPageContent() {
                       )}
                     </div>
 
-                    <Link href={`/buy-property/${property.slug}`}>
-                      <button className="w-full border border-[var(--primary-color)] text-[var(--primary-color)] py-2 rounded-full tracking-widest hover:bg-[var(--primary-color)] hover:text-black transition">
-                        VIEW DETAILS
-                      </button>
-                    </Link>
+                    {/* BUTTON AT BOTTOM */}
+                    <div className="mt-auto">
+                      <Link href={`/buy-property/${property.slug}`}>
+                        <button className="w-full border border-[var(--primary-color)] text-[var(--primary-color)] py-2 rounded-full tracking-widest hover:bg-[var(--primary-color)] hover:text-black transition">
+                          VIEW DETAILS
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -409,31 +391,26 @@ export default function BuyPageContent() {
             )}
           </div>
 
-          {/* RIGHT: STICKY ENQUIRY */}
-          <aside className="hidden md:col-span-2 lg:block sticky top-28 h-fit">
+          {/* ================= RIGHT: STICKY ENQUIRY ================= */}
+          <aside className="hidden lg:block md:col-span-2 self-start sticky top-28">
             <div className="border border-[var(--border-color)] px-6 py-8 rounded-2xl shadow-2xl bg-[var(--secondary-bg)]">
-              {/* Heading */}
               <h3 className="font-[var(--font-heading)] text-2xl text-[var(--text-primary)] tracking-widest mb-2">
                 Enquire Now
               </h3>
 
-              {/* Sub text */}
               <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
                 Share your requirements with us and our property experts will
                 help you find the best options in prime locations.
               </p>
 
-              {/* Trust points */}
               <ul className="text-sm text-[var(--text-muted)] space-y-2 mb-6">
                 <li>✔ Verified Properties</li>
                 <li>✔ Local Market Experts</li>
                 <li>✔ Zero Brokerage Assistance</li>
               </ul>
 
-              {/* Actual Form */}
               <EnquiryForm />
 
-              {/* Footer note */}
               <p className="text-xs text-[var(--text-muted)] mt-4 text-center">
                 We respect your privacy. Your information is safe with us.
               </p>

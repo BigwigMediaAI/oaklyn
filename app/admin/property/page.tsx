@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
+import { ReactNode } from "react";
 import { Plus, Pencil, Trash2, Eye, X } from "lucide-react";
 
 import PropertyForm from "../../components/PropertyForm";
@@ -28,6 +30,8 @@ interface Property {
   videoLink: string;
   images: string[];
   createdAt: string;
+  metaTitle?: string;
+  metaDescription?: string;
 }
 
 export default function AllProperties() {
@@ -46,7 +50,7 @@ export default function AllProperties() {
   const fetchProperties = async (page: number) => {
     try {
       const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/property`,
+        `${process.env.NEXT_PUBLIC_API_BASE}/property`,
         {
           params: { page, limit: pageSize },
         },
@@ -85,7 +89,7 @@ export default function AllProperties() {
     if (!confirm("Are you sure you want to delete this property?")) return;
     try {
       await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_BASE}/api/property/${slug}`,
+        `${process.env.NEXT_PUBLIC_API_BASE}/property/${slug}`,
       );
       fetchProperties(currentPage); // refetch after delete
     } catch (error) {
@@ -106,230 +110,230 @@ export default function AllProperties() {
   console.log(properties);
 
   return (
-    <div className="p-6">
-      {/* Top Bar */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Manage Properties</h1>
+    <div className="h-screen bg-black text-white flex flex-col font-raleway">
+      {/* ================= HEADER (SAME AS LEADS) ================= */}
+      <div className="sticky top-0 z-20 bg-black p-4 sm:p-6 border-b border-gray-700 flex justify-between items-center">
+        <h1 className="text-2xl sm:text-3xl font-bold">Manage Properties</h1>
+
         <button
           onClick={() => openFormModal()}
-          className="flex items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg shadow"
+          className="flex items-center gap-2 bg-[var(--primary-color)] text-black px-4 py-2 rounded-lg shadow hover:opacity-90"
         >
           <Plus size={18} /> Add Property
         </button>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full border border-gray-700 rounded-lg">
-          <thead className="bg-gray-900 text-white">
-            <tr>
-              <th className="p-3">Title</th>
-              <th className="p-3">Purpose</th>
-              <th className="p-3">Type</th>
-              <th className="p-3">Location</th>
-              <th className="p-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {properties.length > 0 ? (
-              properties.map((property) => (
-                <tr key={property._id} className="border-t border-gray-300">
-                  <td className="p-3 text-center">{property.title}</td>
-                  <td className="p-3 text-center">{property.purpose}</td>
-                  <td className="p-3 text-center">{property.type}</td>
-                  <td className="p-3 text-center">{property.location}</td>
-                  <td className="p-3 flex gap-3 justify-center">
-                    <button
-                      onClick={() => openViewModal(property)}
-                      className="p-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white cursor-pointer"
-                    >
-                      <Eye size={16} />
-                    </button>
-                    <button
-                      onClick={() => openFormModal(property)}
-                      className="p-2 bg-yellow-400 hover:bg-yellow-500 rounded-lg text-white cursor-pointer"
-                    >
-                      <Pencil size={16} />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(property.slug)}
-                      className="p-2 bg-red-500 hover:bg-red-600 rounded-lg text-white cursor-pointer"
-                    >
-                      <Trash2 size={16} />
-                    </button>
+      {/* ================= CONTENT ================= */}
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+        {/* ================= TABLE ================= */}
+        <div className="overflow-x-auto">
+          <table className="w-full table-auto border-collapse border border-gray-700">
+            <thead className="bg-[#1e1e1e] text-left">
+              <tr>
+                <th className="px-4 py-3 border-b border-gray-700">Title</th>
+                <th className="px-4 py-3 border-b border-gray-700">Purpose</th>
+                <th className="px-4 py-3 border-b border-gray-700">Type</th>
+                <th className="px-4 py-3 border-b border-gray-700">Location</th>
+                <th className="px-4 py-3 border-b border-gray-700 text-center">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {properties.length > 0 ? (
+                properties.map((property) => (
+                  <tr
+                    key={property._id}
+                    className="even:bg-[#111] hover:bg-[#222] transition"
+                  >
+                    <td className="px-4 py-3">{property.title}</td>
+                    <td className="px-4 py-3">{property.purpose}</td>
+                    <td className="px-4 py-3">{property.type}</td>
+                    <td className="px-4 py-3">{property.location}</td>
+                    <td className="px-4 py-3 flex gap-3 justify-center">
+                      {/* VIEW */}
+                      <button
+                        onClick={() => openViewModal(property)}
+                        className="p-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white"
+                      >
+                        <Eye size={16} />
+                      </button>
+
+                      {/* EDIT */}
+                      <button
+                        onClick={() => openFormModal(property)}
+                        className="p-2 bg-yellow-400 hover:bg-yellow-500 rounded-lg text-black"
+                      >
+                        <Pencil size={16} />
+                      </button>
+
+                      {/* DELETE */}
+                      <button
+                        onClick={() => handleDelete(property.slug)}
+                        className="p-2 bg-red-500 hover:bg-red-600 rounded-lg text-white"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={5}
+                    className="text-center py-6 text-gray-400 italic"
+                  >
+                    No properties found.
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan={5}
-                  className="text-center p-4 text-gray-500 italic"
-                >
-                  No properties found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* ================= PAGINATION ================= */}
+        {totalPages > 1 && (
+          <div className="flex justify-end mt-6">
+            <div className="flex items-center gap-2">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => setCurrentPage((p) => p - 1)}
+                className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-50"
+              >
+                Prev
+              </button>
+
+              <span className="px-3 py-1 bg-[var(--primary-color)] text-black rounded">
+                {currentPage}
+              </span>
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage((p) => p + 1)}
+                className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* View Modal */}
+      {/* ================= VIEW MODAL ================= */}
       {isViewModalOpen && selectedProperty && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 w-11/12 md:w-3/4 lg:w-2/3 max-h-[90vh] overflow-y-auto no-scrollbar rounded-lg shadow-lg p-6 relative">
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-[#0f0f0f] w-11/12 md:w-4/5 lg:w-3/4 max-h-[90vh] overflow-y-auto rounded-xl shadow-2xl p-6 relative">
+            {/* Close */}
             <button
               onClick={() => setIsViewModalOpen(false)}
-              className="absolute top-3 right-3 text-gray-400 hover:text-white cursor-pointer"
+              className="absolute top-4 right-4 text-gray-400 hover:text-white"
             >
-              <X size={20} />
+              <X size={22} />
             </button>
 
-            <h2 className="text-2xl font-bold mb-2">
-              {selectedProperty.title}
-            </h2>
-            <p className="mb-4 text-gray-300">{selectedProperty.description}</p>
-
-            {/* Property Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <p>
-                  <strong>Purpose:</strong> {selectedProperty.purpose}
-                </p>
-                <p>
-                  <strong>Location:</strong> {selectedProperty.location}
-                </p>
-                <p>
-                  <strong>Price:</strong> {selectedProperty.price ?? "—"}
-                </p>
-                <p>
-                  <strong>Type:</strong> {selectedProperty.type ?? "—"}
-                </p>
-              </div>
-              <div>
-                <p>
-                  <strong>Bedrooms:</strong> {selectedProperty.bedrooms ?? "—"}
-                </p>
-                <p>
-                  <strong>Bathrooms:</strong>{" "}
-                  {selectedProperty.bathrooms ?? "—"}
-                </p>
-                <p>
-                  <strong>Area (sqft):</strong>{" "}
-                  {selectedProperty.areaSqft ?? "—"}
-                </p>
-                <p>
-                  <strong>Builder:</strong> {selectedProperty.builder ?? "—"}
-                </p>
-              </div>
+            {/* ================= HEADER ================= */}
+            <div className="border-b border-gray-700 pb-4 mb-6">
+              <h2 className="text-2xl font-bold">{selectedProperty.title}</h2>
+              <p className="text-gray-400 text-sm mt-1">
+                {selectedProperty.location}
+              </p>
             </div>
 
-            {/* Lists */}
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2">
+            {/* ================= BASIC INFO ================= */}
+            <Section title="Basic Information">
+              <Grid>
+                <Item label="Purpose" value={selectedProperty.purpose} />
+                <Item label="Type" value={selectedProperty.type} />
+                <Item label="Builder" value={selectedProperty.builder} />
+                <Item label="Price" value={`₹ ${selectedProperty.price}`} />
+              </Grid>
+            </Section>
+
+            {/* ================= PROPERTY SPECS ================= */}
+            <Section title="Property Specifications">
+              <Grid>
+                <Item label="Bedrooms" value={selectedProperty.bedrooms} />
+                <Item label="Bathrooms" value={selectedProperty.bathrooms} />
+                <Item label="Area (sqft)" value={selectedProperty.areaSqft} />
+              </Grid>
+            </Section>
+
+            {/* ================= DESCRIPTION ================= */}
+            {selectedProperty.description && (
+              <Section title="Description">
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  {selectedProperty.description}
+                </p>
+              </Section>
+            )}
+
+            {/* ================= HIGHLIGHTS ================= */}
+            {selectedProperty.highlights?.length > 0 && (
+              <Section title="Highlights">
+                <List items={selectedProperty.highlights} />
+              </Section>
+            )}
+
+            {/* ================= AMENITIES ================= */}
+            {selectedProperty.featuresAmenities?.length > 0 && (
+              <Section title="Amenities & Features">
+                <List items={selectedProperty.featuresAmenities} />
+              </Section>
+            )}
+
+            {/* ================= NEARBY ================= */}
+            {selectedProperty.nearby?.length > 0 && (
+              <Section title="Nearby Locations">
+                <List items={selectedProperty.nearby} />
+              </Section>
+            )}
+
+            {/* ================= SEO ================= */}
+            <Section title="SEO Metadata">
+              <div className="space-y-3">
                 <div>
-                  <strong>Highlights:</strong>
-                  <ul className="list-disc ml-5 text-gray-300">
-                    {selectedProperty.highlights?.map((h, i) => (
-                      <li key={i}>{h}</li>
-                    ))}
-                  </ul>
+                  <p className="text-xs text-gray-400 mb-1">Meta Title</p>
+                  <div className="bg-[#1a1a1a] p-3 rounded text-sm text-gray-200">
+                    {selectedProperty.metaTitle || "—"}
+                  </div>
                 </div>
+
                 <div>
-                  <strong>Nearby:</strong>
-                  <ul className="list-disc ml-5 text-gray-300">
-                    {selectedProperty.nearby?.map((n, i) => (
-                      <li key={i}>{n}</li>
-                    ))}
-                  </ul>
+                  <p className="text-xs text-gray-400 mb-1">Meta Description</p>
+                  <div className="bg-[#1a1a1a] p-3 rounded text-sm text-gray-200">
+                    {selectedProperty.metaDescription || "—"}
+                  </div>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                <div>
-                  <strong>Features & Amenities:</strong>
-                  <ul className="list-disc ml-5 text-gray-300">
-                    {selectedProperty.featuresAmenities?.map((f, i) => (
-                      <li key={i}>{f}</li>
-                    ))}
-                  </ul>
+            </Section>
+
+            {/* ================= IMAGES ================= */}
+            {selectedProperty.images?.length > 0 && (
+              <Section title="Property Images">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {selectedProperty.images.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img}
+                      alt="Property"
+                      className="h-32 w-full object-cover rounded-lg border border-gray-700"
+                    />
+                  ))}
                 </div>
-              </div>
-            </div>
-
-            {/* Images */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-6">
-              {selectedProperty.images?.map((img, idx) => (
-                <img
-                  key={idx}
-                  src={img}
-                  alt={`Property image ${idx}`}
-                  className="rounded-lg w-full h-40 object-cover"
-                />
-              ))}
-            </div>
-
-            {/* Brochure */}
-            <div className="mt-6">
-              <strong>Brochure:</strong>{" "}
-              {selectedProperty.brochure ? (
-                <a
-                  href={selectedProperty.brochure}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 underline"
-                >
-                  View / Download
-                </a>
-              ) : (
-                <span className="text-gray-400">No brochure uploaded</span>
-              )}
-            </div>
+              </Section>
+            )}
           </div>
         </div>
       )}
 
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-10">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((p) => p - 1)}
-            className="px-3 py-2 rounded border bg-black hover:bg-gray-800 disabled:opacity-50"
-          >
-            Prev
-          </button>
-
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((num) => (
-            <button
-              key={num}
-              onClick={() => setCurrentPage(num)}
-              className={`px-3 py-2 rounded border ${
-                currentPage === num
-                  ? "bg-[var(--primary-color)] text-white"
-                  : "bg-black hover:bg-gray-800"
-              }`}
-            >
-              {num}
-            </button>
-          ))}
-
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((p) => p + 1)}
-            className="px-3 py-2 rounded border hover:bg-gray-800 disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
-      )}
-
-      {/* Form Modal */}
+      {/* ================= FORM MODAL (UNCHANGED) ================= */}
       {isFormModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-gray-800 w-11/12 md:w-3/4 lg:w-2/3 max-h-[90vh] overflow-y-auto no-scrollbar rounded-lg shadow-lg p-6 relative">
             <button
               onClick={() => setIsFormModalOpen(false)}
-              className="absolute top-3 right-3 text-gray-600 hover:text-black"
+              className="absolute top-3 right-3 text-gray-400 hover:text-white"
             >
               <X size={20} />
             </button>
@@ -360,3 +364,53 @@ export default function AllProperties() {
     </div>
   );
 }
+
+/* ================= SECTION ================= */
+interface SectionProps {
+  title: string;
+  children: ReactNode;
+}
+
+const Section = ({ title, children }: SectionProps) => (
+  <div className="mb-6">
+    <h3 className="text-lg font-semibold mb-3">{title}</h3>
+    {children}
+  </div>
+);
+
+/* ================= GRID ================= */
+interface GridProps {
+  children: ReactNode;
+}
+
+const Grid = ({ children }: GridProps) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+    {children}
+  </div>
+);
+
+/* ================= ITEM ================= */
+interface ItemProps {
+  label: string;
+  value?: string | number | null;
+}
+
+const Item = ({ label, value }: ItemProps) => (
+  <div className="bg-[#1a1a1a] p-3 rounded-lg">
+    <p className="text-xs text-gray-400 mb-1">{label}</p>
+    <p className="text-gray-200">{value ?? "—"}</p>
+  </div>
+);
+
+/* ================= LIST ================= */
+interface ListProps {
+  items: string[];
+}
+
+const List = ({ items }: ListProps) => (
+  <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
+    {items.map((item, i) => (
+      <li key={i}>{item}</li>
+    ))}
+  </ul>
+);
