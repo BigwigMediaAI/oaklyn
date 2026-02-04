@@ -1,5 +1,5 @@
 "use client";
-import { EarthIcon, Handshake } from "lucide-react";
+import { EarthIcon, Handshake, User2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { JSX, useEffect, useState } from "react";
 import { FaBook, FaBuilding, FaUser, FaUsers } from "react-icons/fa";
@@ -9,6 +9,7 @@ const Dashboard = () => {
   const [counts, setCounts] = useState({
     leads: 0,
     properties: 0,
+    subscribers: 0,
   });
 
   useEffect(() => {
@@ -20,11 +21,15 @@ const Dashboard = () => {
       fetch(`${process.env.NEXT_PUBLIC_API_BASE}/property`).then((r) =>
         r.json(),
       ),
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/subscribers`).then((r) =>
+        r.json(),
+      ),
     ])
-      .then(([leads, properties]) => {
+      .then(([leads, properties, subscribers]) => {
         setCounts({
           leads: Array.isArray(leads) ? leads.length : 0,
           properties: typeof properties === "object" ? properties.total : 0,
+          subscribers: typeof subscribers === "object" ? subscribers.count : 0,
         });
       })
 
@@ -36,6 +41,7 @@ const Dashboard = () => {
   const cards = [
     { title: "Leads", icon: <FaUsers />, count: counts.leads },
     { title: "Properties", icon: <FaBuilding />, count: counts.properties },
+    { title: "Subscribers", icon: <User2 />, count: counts.subscribers },
   ];
 
   return (

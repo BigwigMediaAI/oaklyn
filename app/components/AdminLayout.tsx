@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import logo from "../assets/4.png";
-import { Building, Gauge, Notebook, Users } from "lucide-react";
+import { Building, Gauge, Notebook, User2, Users } from "lucide-react";
 import Cookies from "js-cookie";
 
 export default function AdminLayout({
@@ -20,6 +20,11 @@ export default function AdminLayout({
   const navItems = [
     { icon: <Gauge size={18} />, label: "Dashboard", to: "/admin" },
     { icon: <Users size={18} />, label: "Leads", to: "/admin/lead" },
+    {
+      icon: <User2 size={18} />,
+      label: "Subscribers",
+      to: "/admin/subscribers",
+    },
     { icon: <Notebook size={18} />, label: "Blogs", to: "/admin/blogs" },
     {
       icon: <Building size={18} />,

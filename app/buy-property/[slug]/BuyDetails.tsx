@@ -37,6 +37,13 @@ interface Property {
   brochure?: string;
 }
 
+const CURRENCIES = {
+  AED: { label: "UAE (AED)", rate: 1, symbol: "AED" },
+  INR: { label: "India (INR)", rate: 22.6, symbol: "₹" },
+  USD: { label: "USA (USD)", rate: 0.27, symbol: "$" },
+  EUR: { label: "Europe (EUR)", rate: 0.25, symbol: "€" },
+};
+
 export default function BuyDetailsClient({ property }: { property: Property }) {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -49,6 +56,17 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
     phone: "",
     countryCode: "+91",
   });
+
+  const [currency, setCurrency] = useState<keyof typeof CURRENCIES>("AED");
+
+  const formatPrice = (price: number) => {
+    const { rate, symbol } = CURRENCIES[currency];
+    const converted = price * rate;
+
+    return `${symbol} ${converted.toLocaleString(undefined, {
+      maximumFractionDigits: 0,
+    })}`;
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -236,32 +254,51 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
             {/* PRICE / TITLE */}
             <div>
               <h3 className="text-xl font-semibold mb-1">{property.title}</h3>
+
               {property.location && (
                 <p className="text-sm text-[var(--text-muted)]">
-                  📍 {property.location}
+                  {property.location}
                 </p>
               )}
-              {property.price && (
-                <p className="text-lg text-[var(--text-muted)]">
-                  AED {property.price}
-                </p>
+
+              {/* PRICE + CURRENCY */}
+              {property.price !== null && property.price !== undefined && (
+                <div className="mt-3 flex items-center gap-3">
+                  <p className="text-2xl font-bold text-[var(--primary-color)]">
+                    {formatPrice(property.price)}
+                  </p>
+
+                  <select
+                    value={currency}
+                    onChange={(e) =>
+                      setCurrency(e.target.value as keyof typeof CURRENCIES)
+                    }
+                    className="border border-[var(--border-color)] rounded-lg px-2 py-1 text-sm bg-[var(--secondary-bg)]"
+                  >
+                    {Object.entries(CURRENCIES).map(([key, val]) => (
+                      <option key={key} value={key}>
+                        {val.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               )}
             </div>
 
             {/* SPECS */}
-            <div className="grid grid-cols-3 gap-4 text-center text-sm">
+            <div className="grid grid-cols-3 gap-4 text-start text-sm">
               {property.bedrooms && (
-                <div className="p-3 rounded-xl bg-[var(--featured)]">
+                <div className=" rounded-xl bg-[var(--featured)]">
                   🛏 <br /> {property.bedrooms}
                 </div>
               )}
               {property.bathrooms && (
-                <div className="p-3 rounded-xl bg-[var(--featured)]">
+                <div className=" rounded-xl bg-[var(--featured)]">
                   🛁 <br /> {property.bathrooms}
                 </div>
               )}
               {property.areaSqft && (
-                <div className="p-3 rounded-xl bg-[var(--featured)]">
+                <div className=" rounded-xl bg-[var(--featured)]">
                   📐 <br /> {property.areaSqft}
                 </div>
               )}

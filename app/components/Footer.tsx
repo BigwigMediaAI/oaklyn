@@ -4,8 +4,68 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
 import footerBg from "../assets/footer-bg.jpg";
+import { useState } from "react";
+import { FormEvent } from "react";
+
+interface SubscribeResponse {
+  success: boolean;
+  message: string;
+  data?: {
+    _id: string;
+    email: string;
+  };
+}
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!email) return;
+
+    try {
+      setLoading(true);
+      setMessage("");
+      setSuccess(false);
+
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE}/subscribers`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        },
+      );
+
+      const text = await res.text();
+
+      let data: SubscribeResponse;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error("Server returned invalid response");
+      }
+
+      if (!res.ok) {
+        throw new Error(data.message || "Subscription failed");
+      }
+
+      setSuccess(true);
+      setMessage("Thanks for subscribing! 🎉");
+      setEmail("");
+    } catch (error) {
+      setSuccess(false);
+      setMessage(
+        error instanceof Error ? error.message : "Subscription failed",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="relative text-white overflow-hidden">
       {/* BACKGROUND IMAGE */}
@@ -22,7 +82,7 @@ export default function Footer() {
       {/* CONTENT */}
       <div className="relative z-10">
         {/* ================= GET IN TOUCH ================= */}
-        <div className="w-11/12 md:w-5/6 mx-auto py-16 border-b border-white/20">
+        <div className="w-11/12 md:w-5/6 mx-auto py-10 border-b border-white/20">
           <h3 className="font-heading text-3xl mb-8">Oaklyn Real Estate</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -36,17 +96,61 @@ export default function Footer() {
                 <Mail size={18} />
                 <span className="font-body">sales@oaklynrealty.ae</span>
               </div>
+              <div className="flex items-center gap-3">
+                <MapPin size={18} />
+                <span className="font-body">
+                  {" "}
+                  Oxford tower, 607, 6th floor, business bay
+                </span>
+              </div>
             </div>
 
-            {/* ADDRESS */}
-            <div className="flex items-start gap-3">
-              <MapPin size={18} className="mt-1" />
-              <p className="font-body text-sm text-gray-300 leading-relaxed">
-                oxford tower, 607, 6th floor, business bay
+            {/* EMAIL SUBSCRIBER */}
+            <div>
+              <h4 className="font-heading text-lg mb-2">Stay in the loop ✨</h4>
+              <p className="text-sm text-gray-300 mb-4">
+                Get latest property updates, offers & insights directly in your
+                inbox.
               </p>
             </div>
+            <div>
+              <form onSubmit={handleSubscribe} className="flex gap-2">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 px-4 py-2 rounded-md bg-transparent border border-white/30 text-white placeholder:text-gray-400 focus:outline-none focus:border-white"
+                  required
+                  disabled={loading}
+                />
 
-            {/* SOCIAL REMOVED */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="min-w-[110px] px-5 py-2 rounded-md bg-white text-black font-medium hover:bg-gray-200 transition disabled:opacity-60 flex items-center justify-center"
+                >
+                  {loading ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                      Sending
+                    </span>
+                  ) : (
+                    "Subscribe"
+                  )}
+                </button>
+              </form>
+
+              {message && (
+                <p
+                  className={`mt-3 text-sm ${
+                    success ? "text-green-400" : "text-red-400"
+                  }`}
+                >
+                  {message}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
