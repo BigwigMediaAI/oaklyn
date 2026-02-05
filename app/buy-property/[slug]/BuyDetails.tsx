@@ -18,6 +18,7 @@ import "yet-another-react-lightbox/styles.css";
 import MiniNavbar from "@/app/components/Mininavbar";
 import EnquiryForm from "@/app/components/EnquiryForm";
 import heroimg from "@/app/assets/hero/about-us.svg";
+import PopupForm from "@/app/components/Popup";
 
 interface Property {
   _id: string;
@@ -47,6 +48,7 @@ const CURRENCIES = {
 export default function BuyDetailsClient({ property }: { property: Property }) {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
@@ -79,34 +81,11 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
     return <p className="text-center py-40 text-xl">Property not found</p>;
   }
 
-  const heroImage = property.images?.[0] || "/placeholder.jpg";
-  const galleryImages = property.images.slice(1);
+  const VISIBLE_COUNT = 3;
 
-  /* ---------------- LEAD SUBMIT ---------------- */
-  const handleSubmitLead = async () => {
-    if (!leadData.name || !/^\d{10}$/.test(leadData.phone)) {
-      alert("Enter valid name and phone");
-      return;
-    }
-
-    try {
-      setLoadingLead(true);
-      await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/brochure-leads`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(leadData),
-      });
-
-      sessionStorage.setItem("brochureLeadSubmitted", "true");
-      setLeadSubmitted(true);
-      setIsLeadModalOpen(false);
-      window.open(property.brochure, "_blank");
-    } catch {
-      alert("Something went wrong");
-    } finally {
-      setLoadingLead(false);
-    }
-  };
+  const totalImages = property.images.length;
+  const visibleImages = property.images.slice(0, VISIBLE_COUNT);
+  const remainingCount = totalImages - VISIBLE_COUNT;
 
   return (
     <div className="bg-[var(--secondary-bg)] text-[var(--text)]">
@@ -142,15 +121,18 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
         {/* ================= LEFT CONTENT ================= */}
         <div className="md:col-span-3 space-y-14">
           {/* ---------- GALLERY ---------- */}
-          {galleryImages.length > 0 && (
-            <section>
-              <h2 className="text-2xl font-semibold mb-6">Gallery</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {galleryImages.map((img, i) => (
+
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">Gallery</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {visibleImages.map((img, i) => {
+                const isLast = i === VISIBLE_COUNT - 1 && remainingCount > 0;
+
+                return (
                   <div
                     key={i}
                     onClick={() => {
-                      setPhotoIndex(i + 1);
+                      setPhotoIndex(i);
                       setIsOpen(true);
                     }}
                     className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer group"
@@ -161,11 +143,20 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
                       fill
                       className="object-cover group-hover:scale-105 transition"
                     />
+
+                    {/* +X Overlay */}
+                    {isLast && (
+                      <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                        <span className="text-white text-3xl font-semibold">
+                          +{remainingCount}
+                        </span>
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
-            </section>
-          )}
+                );
+              })}
+            </div>
+          </section>
 
           {/* ---------- ABOUT ---------- */}
           <section className="bg-[var(--secondary-bg)] border border-[var(--border-color)] rounded-2xl p-8">
@@ -303,6 +294,14 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
                 </div>
               )}
             </div>
+            {property.brochure && (
+              <button
+                onClick={() => setIsPopupOpen(true)}
+                className="border px-4 py-2 rounded-full hover:text-[var(--primary-color)]"
+              >
+                📄 Download Brochure
+              </button>
+            )}
 
             {/* ENQUIRY FORM */}
             <div className="pt-4 border-t border-[var(--border-color)]">
@@ -317,16 +316,6 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
             </div>
 
             {/* BROCHURE */}
-            {property.brochure && (
-              <ButtonFill
-                text="📄 Download Brochure"
-                onClick={() =>
-                  leadSubmitted
-                    ? window.open(property.brochure, "_blank")
-                    : setIsLeadModalOpen(true)
-                }
-              />
-            )}
           </div>
         </aside>
       </section>
@@ -344,14 +333,13 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
         />
       )}
 
-      {/* Brochure Lead Modal */}
       <BrochureLeadModal
-        open={isLeadModalOpen}
-        onClose={() => setIsLeadModalOpen(false)}
-        leadData={leadData}
-        setLeadData={setLeadData}
-        onSubmit={handleSubmitLead}
-        loading={loadingLead}
+        open={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        onSuccess={() => {
+          setIsPopupOpen(false);
+          window.open(property.brochure, "_blank");
+        }}
       />
     </div>
   );

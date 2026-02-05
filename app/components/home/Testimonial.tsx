@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -11,45 +11,22 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-/* ================= DATA ================= */
-
-const testimonials = [
-  {
-    id: 1,
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
-    name: "Lorem Ipsum",
-    initial: "L",
-  },
-  {
-    id: 2,
-    text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    name: "Dolor Sit",
-    initial: "D",
-  },
-  {
-    id: 3,
-    text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-    name: "Amet Elit",
-    initial: "A",
-  },
-  {
-    id: 4,
-    text: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    name: "Sed Tempor",
-    initial: "S",
-  },
-  {
-    id: 5,
-    text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.",
-    name: "Perspiciatis",
-    initial: "P",
-  },
-];
-
-/* ================= COMPONENT ================= */
+interface Testimonial {
+  _id: string;
+  name: string;
+  message: string;
+  image?: string;
+  rating?: number;
+  designation?: string;
+}
 
 export default function TestimonialSection() {
-  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     AOS.init({
@@ -59,9 +36,47 @@ export default function TestimonialSection() {
     });
   }, []);
 
-  const toggleReadMore = (id: number) => {
+  // FETCH TESTIMONIALS
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BASE}/testimonial/public/list`,
+          { cache: "no-store" },
+        );
+        const data = await res.json();
+        setTestimonials(data);
+      } catch (err) {
+        console.error("Failed to fetch testimonials");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  const toggleReadMore = (id: string) => {
     setExpandedId((prev) => (prev === id ? null : id));
   };
+
+  const TestimonialSkeleton = () => (
+    <div className="h-full min-h-[240px] bg-[var(--secondary-bg)] p-8 border border-[var(--primary-color)] flex flex-col animate-pulse">
+      <div className="space-y-3 mb-6">
+        <div className="h-4 bg-gray-700 rounded w-full" />
+        <div className="h-4 bg-gray-700 rounded w-5/6" />
+        <div className="h-4 bg-gray-700 rounded w-4/6" />
+      </div>
+
+      <div className="mt-auto flex items-center gap-4">
+        <div className="w-12 h-12 rounded-full bg-gray-700" />
+        <div className="space-y-2">
+          <div className="h-3 bg-gray-700 rounded w-24" />
+          <div className="h-3 bg-gray-700 rounded w-16" />
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section className="py-16 bg-[var(--secondary-bg)] overflow-hidden">
@@ -85,9 +100,15 @@ export default function TestimonialSection() {
             delay: 3500,
             disableOnInteraction: false,
           }}
+          onBeforeInit={(swiper) => {
+            // @ts-ignore
+            swiper.params.navigation.prevEl = prevRef.current;
+            // @ts-ignore
+            swiper.params.navigation.nextEl = nextRef.current;
+          }}
           navigation={{
-            prevEl: ".testimonial-prev",
-            nextEl: ".testimonial-next",
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
           }}
           breakpoints={{
             0: { slidesPerView: 1 },
@@ -95,55 +116,85 @@ export default function TestimonialSection() {
             1024: { slidesPerView: 3 },
           }}
         >
-          {testimonials.map((item) => (
-            <SwiperSlide key={item.id} className="h-auto">
-              {/* CARD */}
-              <div className="h-full min-h-[240px] bg-white p-8 shadow-lg border border-[var(--primary-color)] transition-all duration-300 flex flex-col">
-                {/* TEXT */}
-                <p
-                  className={`text-gray-700 leading-relaxed mb-4 transition-all duration-300 ${
-                    expandedId === item.id ? "line-clamp-none" : "line-clamp-3"
-                  }`}
-                >
-                  {item.text}
-                </p>
+          {loading
+            ? Array.from({ length: 3 }).map((_, i) => (
+                <SwiperSlide key={i}>
+                  <TestimonialSkeleton />
+                </SwiperSlide>
+              ))
+            : testimonials.map((item) => (
+                <SwiperSlide key={item._id} className="h-auto">
+                  <div className="h-full min-h-[240px] bg-[var(--secondary-bg)] p-8 shadow-lg border border-[var(--primary-color)] flex flex-col">
+                    <p
+                      className={`leading-relaxed mb-4 ${
+                        expandedId === item._id
+                          ? "line-clamp-none"
+                          : "line-clamp-3"
+                      }`}
+                    >
+                      {item.message}
+                    </p>
 
-                {/* READ MORE / LESS */}
-                {item.text.length > 120 && (
-                  <button
-                    onClick={() => toggleReadMore(item.id)}
-                    className="text-sm font-semibold text-[var(--primary-color)] hover:underline self-start mb-3"
-                  >
-                    {expandedId === item.id ? "Read less" : "Read more"}
-                  </button>
-                )}
+                    {item.message.length > 120 && (
+                      <button
+                        onClick={() => toggleReadMore(item._id)}
+                        className="text-sm hover:underline self-start mb-3"
+                      >
+                        {expandedId === item._id ? "Read less" : "Read more"}
+                      </button>
+                    )}
 
-                {/* FOOTER */}
-                <div className="flex items-center gap-4 mt-auto">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--primary-bg)] to-[var(--primary-color)] flex items-center justify-center shadow">
-                    <span className="text-white font-semibold">
-                      {item.initial}
-                    </span>
+                    <div className="flex items-center gap-4 mt-auto">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--primary-bg)] to-[var(--primary-color)] flex items-center justify-center shadow overflow-hidden">
+                        {item.image ? (
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-white font-semibold">
+                            {item.name.charAt(0).toUpperCase()}
+                          </span>
+                        )}
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-lg tracking-wider text-[var(--primary-color)]">
+                          {item.name}
+                        </h4>
+
+                        <div className="flex gap-1 text-yellow-400 text-xs">
+                          {Array.from({ length: item.rating || 5 }).map(
+                            (_, i) => (
+                              <span key={i}>★</span>
+                            ),
+                          )}
+                        </div>
+
+                        <p className="text-xs text-gray-400">
+                          {item.designation}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-[var(--primary-bg)]">
-                      {item.name}
-                    </h4>
-                    <p className="text-xs text-gray-400">Verified Client</p>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
+                </SwiperSlide>
+              ))}
         </Swiper>
 
         {/* LEFT ARROW */}
-        <button className="testimonial-prev z-10 hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[var(--primary-color)] shadow border border-white cursor-pointer transition">
+        <button
+          ref={prevRef}
+          className="z-10 hidden md:flex absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[var(--primary-color)] shadow border border-white cursor-pointer"
+        >
           <ChevronLeft className="m-auto" />
         </button>
 
         {/* RIGHT ARROW */}
-        <button className="testimonial-next z-10 hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[var(--primary-color)] shadow border border-white cursor-pointer transition">
+        <button
+          ref={nextRef}
+          className="z-10 hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-[var(--primary-color)] shadow border border-white cursor-pointer"
+        >
           <ChevronRight className="m-auto" />
         </button>
       </div>

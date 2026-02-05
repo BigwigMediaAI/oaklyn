@@ -35,39 +35,10 @@ import img16 from "../assets/client16.png";
 import project5 from "../assets/projects/project_1.jpg";
 import MiniNavbar from "../components/Mininavbar";
 import PropertyCategoriesHover from "../components/home/PropertyCategory";
-
-const project1 = "/assets/projects/project_1.jpg";
-const project2 = "/assets/projects/project_2.jpg";
-const project3 = "/assets/projects/project_3.jpg";
-const project4 = "/assets/projects/project_4.jpg";
-
-const featuredProjects = [
-  {
-    id: 1,
-    title: "Lorem Ipsum One",
-    image: project5,
-  },
-  {
-    id: 2,
-    title: "Lorem Ipsum Two",
-    image: project5,
-  },
-  {
-    id: 3,
-    title: "Lorem Ipsum Three",
-    image: project5,
-  },
-  {
-    id: 4,
-    title: "Lorem Ipsum Four",
-    image: project5,
-  },
-  {
-    id: 5,
-    title: "Lorem Ipsum Five",
-    image: project5,
-  },
-];
+import project1 from "../assets/projects/project_1.jpg";
+import project2 from "../assets/projects/project_2.jpg";
+import project3 from "../assets/projects/project_3.jpg";
+import project4 from "../assets/projects/project_4.jpg";
 
 const clients = [
   { id: 1, logo: img1, name: "Client 1" },
@@ -118,16 +89,6 @@ const blogs = [
     image: project4,
   },
 ];
-
-interface Property {
-  _id: string;
-  title: string;
-  slug: string;
-  location: string;
-  images: string[];
-  featuredThumbnail?: string;
-  createdAt?: string;
-}
 
 export default function Home() {
   const [openPopup, setOpenPopup] = useState(false);

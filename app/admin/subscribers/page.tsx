@@ -73,38 +73,6 @@ const AdminSubscriber = () => {
     setCurrentPage(1);
   }, [selectedDate, subscribers]);
 
-  // ================= TOGGLE ACTIVE =================
-  const toggleStatus = async (id: string, currentStatus: boolean) => {
-    if (currentStatus && !confirm("Mark this subscriber as inactive?")) return;
-
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE}/subscribers/${id}/unsubscribe`,
-        { method: "PATCH" },
-      );
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Update failed");
-      }
-
-      setSubscribers((prev) =>
-        prev.map((s) =>
-          s._id === id ? { ...s, isActive: !currentStatus } : s,
-        ),
-      );
-
-      setFilteredSubscribers((prev) =>
-        prev.map((s) =>
-          s._id === id ? { ...s, isActive: !currentStatus } : s,
-        ),
-      );
-    } catch (err) {
-      alert(err instanceof Error ? err.message : "Status update failed");
-    }
-  };
-
   // ================= HARD DELETE =================
   const handleDelete = async (id: string) => {
     if (!confirm("This will permanently delete the subscriber. Continue?"))
@@ -208,7 +176,6 @@ const AdminSubscriber = () => {
 
                     <td className="px-4 py-3">
                       <button
-                        onClick={() => toggleStatus(sub._id, sub.isActive)}
                         className={`px-2 py-1 rounded text-xs font-medium ${
                           sub.isActive
                             ? "bg-green-600/20 text-green-400"

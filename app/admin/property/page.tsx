@@ -117,7 +117,7 @@ export default function AllProperties() {
 
         <button
           onClick={() => openFormModal()}
-          className="flex items-center gap-2 bg-[var(--primary-color)] text-black px-4 py-2 rounded-lg shadow hover:opacity-90"
+          className="px-5 flex gap-3 justify-center items-center py-2 rounded-lg border hover:text-[var(--primary-color)]"
         >
           <Plus size={18} /> Add Property
         </button>

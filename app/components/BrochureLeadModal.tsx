@@ -1,89 +1,54 @@
 "use client";
+import React from "react";
+import Image from "next/image";
+import popup from "../assets/h8_pic5.jpg";
+import EnquiryForm from "./EnquiryForm";
 
-import ButtonFill from "./Button";
-
-interface Props {
+interface PopupFormProps {
   open: boolean;
   onClose: () => void;
-  leadData: {
-    name: string;
-    phone: string;
-    countryCode: string;
-  };
-  setLeadData: (data: any) => void;
-  onSubmit: () => void;
-  loading: boolean;
+  onSuccess: () => void;
 }
 
-export default function BrochureLeadModal({
+const BrochureLeadModal: React.FC<PopupFormProps> = ({
   open,
   onClose,
-  leadData,
-  setLeadData,
-  onSubmit,
-  loading,
-}: Props) {
+  onSuccess,
+}) => {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl w-11/12 max-w-md shadow-xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md animate-fadeIn">
+      <div className="relative w-11/12 max-w-4xl bg-[var(--primary-bg)] rounded-3xl shadow-xl border overflow-hidden flex flex-col md:flex-row">
+        {/* CLOSE */}
         <button
-          className="absolute top-4 right-4 text-2xl font-bold text-gray-600 hover:text-gray-900 dark:text-gray-300"
           onClick={onClose}
+          className="absolute top-3 right-3 text-white text-xl z-10"
         >
-          ×
+          ✕
         </button>
 
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
-          Get Your Brochure
-        </h2>
-
-        <div className="flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Your Name*"
-            className="border border-gray-300 dark:border-gray-600 rounded-lg p-3"
-            value={leadData.name}
-            onChange={(e) => setLeadData({ ...leadData, name: e.target.value })}
-          />
-
-          <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
-            <select
-              className="bg-gray-100 dark:bg-gray-700 p-3 border-r"
-              value={leadData.countryCode}
-              onChange={(e) =>
-                setLeadData({ ...leadData, countryCode: e.target.value })
-              }
-            >
-              <option value="+91">🇮🇳 +91</option>
-              <option value="+971">🇦🇪 +971</option>
-              <option value="+1">🇺🇸 +1</option>
-              <option value="+44">🇬🇧 +44</option>
-              <option value="+61">🇦🇺 +61</option>
-            </select>
-
-            <input
-              type="tel"
-              placeholder="Phone Number*"
-              className="flex-1 p-3 outline-none"
-              value={leadData.phone}
-              onChange={(e) =>
-                setLeadData({ ...leadData, phone: e.target.value })
-              }
-            />
-          </div>
-
-          <ButtonFill
-            onClick={onSubmit}
-            text={loading ? "Submitting..." : "Submit & View Brochure"}
-          />
+        {/* IMAGE */}
+        <div className="hidden md:block relative w-1/2">
+          <Image src={popup} alt="Popup" fill className="object-fill" />
         </div>
 
-        <p className="mt-4 text-sm text-gray-500">
-          We respect your privacy. Your information will not be shared.
-        </p>
+        {/* FORM */}
+        <div className="w-full md:w-1/2 p-8">
+          <h2 className="text-2xl font-bold text-center mb-6 text-[var(--primary-color)]">
+            Enquire Now
+          </h2>
+
+          <EnquiryForm
+            variant="default"
+            onSuccess={() => {
+              onSuccess(); // 🎯 triggers brochure download
+            }}
+          />
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default BrochureLeadModal;

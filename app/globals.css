@@ -196,3 +196,21 @@ iframe.goog-te-menu-frame {
 .blog-popup-cta {
   margin: 30px 0;
 }
+
+/* Fixed height + scrollable editor */
+.newsletter-editor .ql-container {
+  min-height: 180px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Keep text readable */
+.newsletter-editor .ql-editor {
+  min-height: 180px;
+}
+
+/* Optional: toolbar styling for dark UI */
+.newsletter-editor .ql-toolbar {
+  background: #0f0f0f;
+  border-color: #374151;
+}

@@ -1,5 +1,12 @@
 "use client";
-import { FaBars, FaTimes, FaSignOutAlt, FaBuilding } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaSignOutAlt,
+  FaBuilding,
+  FaMailBulk,
+  FaQuoteRight,
+} from "react-icons/fa";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -35,6 +42,16 @@ export default function AdminLayout({
       icon: <FaBuilding size={18} />,
       label: "Property",
       to: "/admin/property",
+    },
+    {
+      icon: <FaMailBulk size={18} />,
+      label: "Newsletter",
+      to: "/admin/newsletter",
+    },
+    {
+      icon: <FaQuoteRight size={18} />,
+      label: "Testimonial",
+      to: "/admin/testimonial",
     },
   ];
 

@@ -95,7 +95,7 @@ const AdminLead = () => {
   return (
     <div className="h-screen bg-black text-white font-raleway flex flex-col p-0">
       {/* HEADER */}
-      <div className="sticky top-0 z-20 bg-black p-4 sm:p-6 border-b border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="sticky top-0 z-20 bg-black p-4 md:py-6 border-b border-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h1 className="text-2xl sm:text-3xl font-bold">Leads</h1>
         <div className="flex items-center gap-2">
           <label htmlFor="filter-date" className="text-sm text-gray-400">
@@ -111,7 +111,7 @@ const AdminLead = () => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+      <div className="flex-1 overflow-y-auto p-4 md:py-6">
         {filteredContacts.length === 0 ? (
           <p className="text-gray-400">No Leads found.</p>
         ) : (
@@ -184,7 +184,7 @@ const AdminLead = () => {
 
             {/* ================= DESKTOP VIEW (TABLE) ================= */}
             <div className="hidden md:block overflow-x-auto">
-              <table className="w-full table-auto border-collapse border border-gray-700 text-sm sm:text-base">
+              <table className="w-full table-auto border-collapse border border-gray-700 text-sm">
                 <thead className="bg-[#1e1e1e] text-left">
                   <tr>
                     <th className="px-4 py-3 border-b border-gray-700">Name</th>

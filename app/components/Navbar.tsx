@@ -127,18 +127,6 @@ export default function Navbar() {
                   >
                     Sell Property
                   </Link>
-                  <Link
-                    href="#rent-property"
-                    className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
-                  >
-                    Rent Property
-                  </Link>
-                  <Link
-                    href="#lease-property"
-                    className="block px-5 py-3 text-black hover:text-[var(--primary-color)]  hover:bg-[var(--primary-bg)] transition"
-                  >
-                    Lease Property
-                  </Link>
                 </div>
               )}
             </li>
@@ -248,17 +236,11 @@ export default function Navbar() {
 
             {mobilePropOpen && (
               <div className="ml-4 flex flex-col gap-4 text-base text-gray-300">
-                <Link href="#buy-property" onClick={() => setOpen(false)}>
+                <Link href="/buy-property" onClick={() => setOpen(false)}>
                   Buy Property
                 </Link>
                 <Link href="/sell-property" onClick={() => setOpen(false)}>
                   Sell Property
-                </Link>
-                <Link href="#rent-property" onClick={() => setOpen(false)}>
-                  Rent Property
-                </Link>
-                <Link href="#lease-property" onClick={() => setOpen(false)}>
-                  Lease Property
                 </Link>
               </div>
             )}
