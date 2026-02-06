@@ -46,7 +46,7 @@ export default function CTASection() {
             </button>
 
             <Link
-              href="/properties"
+              href="/buy-property"
               className="
                 inline-flex items-center justify-center
                 px-8 h-12

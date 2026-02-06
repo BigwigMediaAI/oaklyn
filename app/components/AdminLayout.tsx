@@ -114,7 +114,7 @@ export default function AdminLayout({
               key={to}
               href={to}
               onClick={() => setMobileMenuOpen(false)}
-              className={`flex items-center gap-3 px-6 py-3 text-sm font-medium transition-all duration-200 
+              className={`flex items-center  gap-3 px-6 py-3 text-sm font-medium transition-all duration-200 
                 ${
                   pathname === to
                     ? "bg-[var(--primary-color)] text-white shadow-md"
@@ -150,7 +150,7 @@ export default function AdminLayout({
           />
         </div>
 
-        <nav className="flex flex-col gap-1 text-sm font-medium overflow-y-auto flex-1">
+        <nav className="flex flex-col gap-1 text-sm font-medium overflow-y-auto flex-1 hide-scrollbar">
           {navItems.map(({ icon, label, to }) => (
             <Link
               key={to}

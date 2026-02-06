@@ -6,6 +6,13 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import footerBg from "../assets/footer-bg.jpg";
 import { useState } from "react";
 import { FormEvent } from "react";
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaLinkedinIn,
+  FaYoutube,
+  FaWhatsapp,
+} from "react-icons/fa";
 
 interface SubscribeResponse {
   success: boolean;
@@ -166,6 +173,66 @@ export default function Footer() {
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
               </p>
+              {/* SOCIAL MEDIA */}
+              <div className="mt-6">
+                <h4 className="font-heading text-lg mb-3">Follow us 🤍</h4>
+
+                <div className="flex items-center gap-4">
+                  <a
+                    href="https://www.instagram.com/oaklynrealty"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-pink-500 transition"
+                    aria-label="Instagram"
+                  >
+                    <FaInstagram size={18} />
+                  </a>
+
+                  <a
+                    href="https://www.facebook.com/oaklynrealty"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-blue-600 transition"
+                    aria-label="Facebook"
+                  >
+                    <FaFacebookF size={16} />
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/company/oaklynrealty"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-blue-400 transition"
+                    aria-label="LinkedIn"
+                  >
+                    <FaLinkedinIn size={16} />
+                  </a>
+
+                  <a
+                    href="https://wa.me/97142863789"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-green-400 transition"
+                    aria-label="WhatsApp"
+                  >
+                    <FaWhatsapp size={18} />
+                  </a>
+
+                  <a
+                    href="https://www.youtube.com/@oaklynrealty"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-[var(--primary-color)] hover:text-red-500 transition"
+                    aria-label="YouTube"
+                  >
+                    <FaYoutube size={18} />
+                  </a>
+                </div>
+
+                <p className="text-xs text-gray-400 mt-3">
+                  Follow us for latest listings & market insights
+                </p>
+              </div>
             </div>
 
             {/* QUICK LINKS */}
@@ -175,6 +242,16 @@ export default function Footer() {
                 <li>
                   <Link href="/about" className="hover:text-white">
                     About
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/buy-property" className="hover:text-white">
+                    Buy Property
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/sell-property" className="hover:text-white">
+                    Sell Property
                   </Link>
                 </li>
                 <li>
@@ -197,26 +274,42 @@ export default function Footer() {
 
             {/* SERVICES */}
             <div className="lg:col-span-1">
-              <h4 className="font-heading text-lg mb-4"> Services</h4>
+              <h4 className="font-heading text-lg mb-4"> Insights</h4>
               <ul className="space-y-2 font-body text-sm text-gray-300">
                 <li>
-                  <Link href="#" className="hover:text-white">
-                    Buy Property
+                  <Link
+                    href="/why-invest-in-dubai"
+                    className="hover:text-white"
+                  >
+                    Why Invest in Dubai
                   </Link>
                 </li>
                 <li>
-                  <Link href="/sell-property" className="hover:text-white">
-                    Sell Property
+                  <Link href="/about-dubai" className="hover:text-white">
+                    About Dubai
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white">
-                    Rent Property
+                  <Link href="/buyer-guide" className="hover:text-white">
+                    Buyer’s Guide
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white">
-                    Lease Property
+                  <Link href="/seller-guide" className="hover:text-white">
+                    Seller’s Guide
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/relocating-to-dubai"
+                    className="hover:text-white"
+                  >
+                    Relocating to Dubai
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/faq" className="hover:text-white">
+                    FAQ
                   </Link>
                 </li>
               </ul>

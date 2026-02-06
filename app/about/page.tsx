@@ -25,7 +25,7 @@ import CTASection from "../components/CTASection";
 const features = [
   {
     title: "Fresh Booking",
-    icon: Building2, // New projects 
+    icon: Building2, // New projects
     image: img1,
     points: [
       "Direct bookings with top developers",
@@ -344,6 +344,85 @@ export default function About() {
     "
                 >
                   {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= TEAM SECTION ================= */}
+      <section className="bg-[var(--secondary-bg)] py-16">
+        <div className="w-11/12 md:w-5/6 mx-auto">
+          {/* Header */}
+          <div className=" mb-16">
+            <p className="text-xl tracking-[0.2em] uppercase text-[var(--primary-color)] font-body font-semibold">
+              Our Process
+            </p>
+
+            <h2 className="mt-4 mb-10 text-4xl md:text-5xl font-heading text-[var(--text-light)]">
+              Meet the Team Behind Our Success
+            </h2>
+
+            <p
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="max-w-2xl  text-[var(--text-muted)]"
+            >
+              Our team combines deep market expertise with a client-first
+              approach to deliver exceptional real estate experiences.
+            </p>
+          </div>
+
+          {/* Team Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+            {[
+              {
+                name: "John Matthews",
+                role: "Founder & Managing Director",
+                image: "/member1.avif",
+                desc: "A seasoned real estate leader with extensive experience in Dubai’s luxury property market.",
+              },
+              {
+                name: "Sarah Williams",
+                role: "Senior Property Consultant",
+                image: "/member2.jpg",
+                desc: "Specializing in high-value investments and premium residential properties.",
+              },
+              {
+                name: "Michael Khan",
+                role: "Client Relations Manager",
+                image: "/member3.avif",
+                desc: "Focused on delivering seamless client journeys and long-term relationships.",
+              },
+            ].map((member, index) => (
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="group text-center"
+              >
+                {/* Image */}
+                <div className="relative mx-auto mb-6 h-40 w-40 rounded-full overflow-hidden border-2 border-transparent transition-all duration-300 group-hover:border-[var(--primary-color)]">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Info */}
+                <h3 className="font-heading text-xl font-semibold text-[var(--text-primary)] mb-1">
+                  {member.name}
+                </h3>
+
+                <p className="text-sm text-[var(--primary-color)] mb-4">
+                  {member.role}
+                </p>
+
+                <p className="text-[var(--text-muted)] leading-relaxed px-4">
+                  {member.desc}
                 </p>
               </div>
             ))}

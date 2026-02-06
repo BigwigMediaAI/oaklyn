@@ -224,8 +224,6 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
               <option value="">Select Purpose</option>
               <option value="Buy">Buy</option>
               <option value="Sell">Sell</option>
-              <option value="Rent">Rent</option>
-              <option value="Lease">Lease</option>
             </select>
 
             <select
