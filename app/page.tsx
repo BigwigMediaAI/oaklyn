@@ -1,6 +1,6 @@
 import Image from "next/image";
 import coming from "./assets/oaklyn-coming-soon.png";
-import logo from "./assets/logo.png";
+import logo from "./assets/4.png";
 
 export default function Home() {
   return (
