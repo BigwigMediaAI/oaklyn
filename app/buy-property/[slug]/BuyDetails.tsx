@@ -40,24 +40,15 @@ interface Property {
 
 const CURRENCIES = {
   AED: { label: "UAE (AED)", rate: 1, symbol: "AED" },
-  INR: { label: "India (INR)", rate: 22.6, symbol: "₹" },
+  INR: { label: "India (INR)", rate: 24.59, symbol: "₹" },
   USD: { label: "USA (USD)", rate: 0.27, symbol: "$" },
-  EUR: { label: "Europe (EUR)", rate: 0.25, symbol: "€" },
+  EUR: { label: "Europe (EUR)", rate: 0.23, symbol: "€" },
 };
 
 export default function BuyDetailsClient({ property }: { property: Property }) {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const [leadSubmitted, setLeadSubmitted] = useState(false);
-  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
-  const [loadingLead, setLoadingLead] = useState(false);
-  const [leadData, setLeadData] = useState({
-    name: "",
-    phone: "",
-    countryCode: "+91",
-  });
 
   const [currency, setCurrency] = useState<keyof typeof CURRENCIES>("AED");
 
@@ -69,13 +60,6 @@ export default function BuyDetailsClient({ property }: { property: Property }) {
       maximumFractionDigits: 0,
     })}`;
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (sessionStorage.getItem("brochureLeadSubmitted")) {
-      setLeadSubmitted(true);
-    }
-  }, []);
 
   if (!property) {
     return <p className="text-center py-40 text-xl">Property not found</p>;
