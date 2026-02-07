@@ -56,7 +56,7 @@ const BuyerGuide = () => {
         </section>
 
         {/* ================= BUYER INTRO ================= */}
-        <section className="bg-[var(--secondary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-4/5 mx-auto text-center">
             <span
               data-aos="fade-up"
@@ -87,13 +87,13 @@ const BuyerGuide = () => {
         </section>
 
         {/* ================= BUYING PROCESS ================= */}
-        <section className="bg-[var(--primary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto">
             <div className="text-center mb-14">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold  mb-4">
                 Step-by-Step Buying Process
               </h2>
-              <p className="text-white/70 max-w-2xl mx-auto">
+              <p className=" max-w-2xl mx-auto">
                 A clear, structured journey from property selection to
                 ownership.
               </p>
@@ -154,7 +154,7 @@ const BuyerGuide = () => {
         </section>
 
         {/* ================= IMPORTANT NOTES ================= */}
-        <section className="bg-[var(--secondary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
             <div data-aos="fade-right">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-6">
@@ -175,7 +175,7 @@ const BuyerGuide = () => {
 
             <div
               data-aos="fade-left"
-              className="bg-[var(--primary-bg)] p-10 rounded-2xl border border-[var(--border-color)]"
+              className="bg-[var(--primary-bg)]/60 p-10 rounded-2xl border border-[var(--border-color)]"
             >
               <ul className="space-y-5 text-white/80">
                 {[
@@ -195,11 +195,11 @@ const BuyerGuide = () => {
         </section>
 
         {/* ================= WHY US ================= */}
-        <section className="bg-gradient-to-b from-[var(--primary-bg)] to-[#142a1e] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-4/5 mx-auto text-center">
             <h2
               data-aos="fade-up"
-              className="font-heading text-3xl md:text-4xl font-bold text-white mb-6"
+              className="font-heading text-3xl md:text-4xl font-bold  mb-6"
             >
               Why Buy With Us
             </h2>
@@ -207,7 +207,7 @@ const BuyerGuide = () => {
             <p
               data-aos="fade-up"
               data-aos-delay="100"
-              className="text-white/70 max-w-2xl mx-auto mb-12"
+              className=" max-w-2xl mx-auto mb-12"
             >
               We provide expert guidance, market insights, and end-to-end
               support to ensure a seamless buying experience.
@@ -223,7 +223,7 @@ const BuyerGuide = () => {
                   key={index}
                   data-aos="zoom-in"
                   data-aos-delay={index * 100}
-                  className="bg-white/5 border border-white/10 rounded-xl p-6 text-white/90"
+                  className="bg-[var(--primary-bg)]/5 border border-white/10 rounded-xl p-6 "
                 >
                   {item}
                 </div>

@@ -73,13 +73,13 @@ const WhyDubai = () => {
         </section>
 
         {/* ================= BENEFITS ================= */}
-        <section className="bg-gradient-to-b from-[var(--primary-bg)] to-[#142a1e] py-16">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto">
             <div className="text-center mb-14">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold  mb-4">
                 Investment Advantages That Matter
               </h2>
-              <p className="text-white/70 max-w-2xl mx-auto">
+              <p className=" max-w-2xl mx-auto">
                 Dubai offers a rare combination of financial freedom, global
                 connectivity, and long-term growth potential.
               </p>

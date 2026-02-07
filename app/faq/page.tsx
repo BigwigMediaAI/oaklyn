@@ -155,7 +155,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="w-full flex justify-between items-center px-6 py-4 text-left transition hover:bg-[var(--hover-bg)]"
+        className="w-full flex justify-between items-center px-6 py-4 text-left transition hover:bg-[var(--primary-color)]/60"
       >
         <span className="font-medium text-[var(--text-primary)]">
           {question}

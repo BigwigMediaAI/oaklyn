@@ -56,7 +56,7 @@ const RelocatingToDubai = () => {
         </section>
 
         {/* ================= RELOCATION INTRO ================= */}
-        <section className="bg-[var(--secondary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-4/5 mx-auto text-center">
             <span
               data-aos="fade-up"
@@ -87,13 +87,13 @@ const RelocatingToDubai = () => {
         </section>
 
         {/* ================= WHY DUBAI ================= */}
-        <section className="bg-[var(--primary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto">
             <div className="text-center mb-14">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold  mb-4">
                 Why People Choose Dubai
               </h2>
-              <p className="text-white/70 max-w-2xl mx-auto">
+              <p className=" max-w-2xl mx-auto">
                 A city that combines opportunity, security, and global
                 connectivity.
               </p>
@@ -133,7 +133,7 @@ const RelocatingToDubai = () => {
         </section>
 
         {/* ================= LIVING IN DUBAI ================= */}
-        <section className="bg-[var(--secondary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto">
             <div className="text-center mb-14">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
@@ -178,11 +178,11 @@ const RelocatingToDubai = () => {
         </section>
 
         {/* ================= HOW WE HELP ================= */}
-        <section className="bg-gradient-to-b from-[var(--primary-bg)] to-[#142a1e] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-4/5 mx-auto text-center">
             <h2
               data-aos="fade-up"
-              className="font-heading text-3xl md:text-4xl font-bold text-white mb-6"
+              className="font-heading text-3xl md:text-4xl font-bold  mb-6"
             >
               How We Support Your Relocation
             </h2>
@@ -190,7 +190,7 @@ const RelocatingToDubai = () => {
             <p
               data-aos="fade-up"
               data-aos-delay="100"
-              className="text-white/70 max-w-2xl mx-auto mb-12"
+              className=" max-w-2xl mx-auto mb-12"
             >
               Our team provides end-to-end assistance to make your transition to
               Dubai smooth and stress-free.
@@ -206,7 +206,7 @@ const RelocatingToDubai = () => {
                   key={index}
                   data-aos="zoom-in"
                   data-aos-delay={index * 100}
-                  className="bg-white/5 border border-white/10 rounded-xl p-6 text-white/90"
+                  className="bg-[var(--primary-bg)]/5 border border-white/10 rounded-xl p-6 "
                 >
                   {item}
                 </div>

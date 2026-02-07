@@ -56,7 +56,7 @@ const AboutDubai = () => {
         </section>
 
         {/* ================= ABOUT OVERVIEW ================= */}
-        <section className="bg-[var(--secondary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-4/5 mx-auto text-center">
             <span
               data-aos="fade-up"
@@ -88,15 +88,15 @@ const AboutDubai = () => {
         </section>
 
         {/* ================= VISION & GROWTH ================= */}
-        <section className="bg-[var(--primary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
             {/* Left */}
             <div data-aos="fade-right">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold  mb-6">
                 A City Designed for the Future
               </h2>
 
-              <p className="text-white/80 leading-relaxed mb-4">
+              <p className=" leading-relaxed mb-4">
                 Guided by visionary leadership, Dubai has consistently focused
                 on long-term growth, innovation, and sustainability. Strategic
                 planning, investor-friendly regulations, and smart city
@@ -104,7 +104,7 @@ const AboutDubai = () => {
                 cities in the world.
               </p>
 
-              <p className="text-white/80 leading-relaxed">
+              <p className=" leading-relaxed">
                 From cutting-edge architecture to digital governance and
                 sustainable urban development, Dubai continues to set global
                 benchmarks for progress and ambition.
@@ -134,7 +134,7 @@ const AboutDubai = () => {
         </section>
 
         {/* ================= LIFESTYLE & CULTURE ================= */}
-        <section className="bg-[var(--secondary-bg)] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto">
             <div className="text-center mb-14">
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-4">
@@ -180,11 +180,11 @@ const AboutDubai = () => {
         </section>
 
         {/* ================= DUBAI TODAY ================= */}
-        <section className="bg-gradient-to-b from-[var(--primary-bg)] to-[#142a1e] py-20">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto text-center">
             <h2
               data-aos="fade-up"
-              className="font-heading text-3xl md:text-4xl font-bold text-white mb-10"
+              className="font-heading text-3xl md:text-4xl font-bold  mb-10"
             >
               Dubai Today
             </h2>
@@ -200,7 +200,7 @@ const AboutDubai = () => {
                   key={index}
                   data-aos="zoom-in"
                   data-aos-delay={index * 100}
-                  className="bg-white/5 border border-white/10 rounded-xl p-6 text-white/90"
+                  className=" border border-[var(--primary-color)] rounded-xl p-6 "
                 >
                   {item}
                 </div>
