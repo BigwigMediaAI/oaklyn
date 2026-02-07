@@ -67,12 +67,25 @@ export default function Navbar() {
     <>
       {/* NAVBAR */}
       <header
-        className={`fixed left-0 w-full z-40 border-b transition-all duration-300 ${
+        className={`fixed left-0 w-full z-40 transition-all duration-300 ${
           scrolled
-            ? "bg-[var(--primary-bg)] top-0 text-[var(--text-light)] border-black/10 shadow-lg"
-            : "bg-transparent top-0 md:top-10 text-white border-white/30"
+            ? "top-0 text-[var(--text-light)]"
+            : "top-0 md:top-10 text-white"
         }`}
       >
+        {/* Glass layer */}
+        {scrolled && (
+          <div
+            className="
+      absolute inset-0
+      bg-[var(--primary-bg)]/50
+      backdrop-blur-2xl
+      border-b border-black/10
+      shadow-lg
+      -z-10
+    "
+          />
+        )}
         <nav className="relative w-11/12 mx-auto flex items-center justify-between text-white py-3">
           {/* LEFT — LOGO */}
           <Link href="/home" className="flex items-center">

@@ -113,7 +113,7 @@ export default function About() {
       </section>
 
       {/* ================= ABOUT INTRO SECTION ================= */}
-      <section className=" bg-[var(--secondary-bg)] relative py-16  overflow-hidden">
+      <section className=" relative py-16  overflow-hidden">
         <div className="relative w-11/12 md:w-5/6 mx-auto">
           {/* ===== MOBILE / TABLET SIMPLE LAYOUT ===== */}
           <div className="block lg:hidden space-y-8">
@@ -146,7 +146,7 @@ export default function About() {
           {/* ===== DESKTOP OFFSET PANEL LAYOUT ===== */}
           <div className="hidden lg:block relative">
             {/* BIG RIGHT PANEL */}
-            <div className="relative ml-auto w-[58%] border border-[var(--primary-bg)]  py-12 px-16">
+            <div className="relative ml-auto w-[58%] shadow-2xl  py-12 px-16">
               <div className="max-w-xl ml-auto space-y-6 text-[var(--text-light)] leading-relaxed">
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -185,12 +185,12 @@ export default function About() {
             </div>
 
             {/* SMALL LEFT PANEL (VERTICALLY CENTERED) */}
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[45%] bg-[var(--primary-bg)] px-14 py-12 shadow-sm">
-              <p className="text-xl tracking-[0.2em] uppercase text-[var(--primary-color)] font-body font-semibold">
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 w-[45%]  px-14 py-12 shadow-xl bg-[var(--primary-color)]">
+              <p className="text-xl tracking-[0.2em] uppercase text-white font-body font-semibold">
                 Who we are
               </p>
 
-              <h2 className="mt-4 text-4xl md:text-5xl font-heading text-white">
+              <h2 className="mt-4 text-4xl md:text-5xl font-heading ">
                 Lorem ipsum, dolor sit amet consectetur.
               </h2>
             </div>
@@ -307,7 +307,7 @@ export default function About() {
     p-6
     bg-[var(--secondary-bg)]
     transition-all duration-300
-    hover:bg-[var(--hover-bg)]
+    hover:bg-[var(--primary-color)]
   "
               >
                 {/* STEP NUMBER */}

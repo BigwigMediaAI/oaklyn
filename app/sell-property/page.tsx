@@ -94,7 +94,7 @@ const SellProperty = () => {
                     rel="noopener noreferrer"
                     className="inline-flex"
                   >
-                    <span className="px-8 h-12 flex items-center justify-center rounded-xl border border-[var(--primary-color)] text-[var(--primary-color)] font-body font-semibold transition hover:bg-[var(--hover-bg)] hover:text-white">
+                    <span className="px-8 h-12 flex items-center justify-center rounded-xl border border-[var(--primary-color)] text-[var(--primary-color)] font-body font-semibold transition hover:bg-[var(--primary-color)] hover:text-white">
                       Speak with an Expert
                     </span>
                   </Link>
@@ -180,7 +180,7 @@ const SellProperty = () => {
             p-6
             bg-[var(--secondary-bg)]
             transition-all duration-300
-            hover:bg-[var(--hover-bg)]
+            hover:bg-[var(--primary-color)]
           "
                 >
                   <h4 className="font-heading text-lg mb-3 text-[var(--text-light)] transition-colors duration-300 group-hover:text-white">
@@ -301,7 +301,7 @@ const SellProperty = () => {
           </div>
         </section>
 
-        <section className="bg-[var(--primary-bg)] py-16">
+        <section className="bg-[var(--secondary-bg)] py-16">
           <div className="w-11/12 md:w-5/6 mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
               {/* LEFT – CONTENT */}
@@ -310,11 +310,11 @@ const SellProperty = () => {
                   Free Property Valuation
                 </p>
 
-                <h2 className="font-heading text-4xl md:text-5xl text-white mb-6 leading-tight">
+                <h2 className="font-heading text-4xl md:text-5xl mb-6 leading-tight">
                   Know the True Value <br /> of Your Property
                 </h2>
 
-                <p className="text-gray-200 text-lg leading-relaxed mb-10">
+                <p className="text-var(--text-muted) text-lg leading-relaxed mb-10">
                   Before you sell, it’s important to understand what your
                   property is genuinely worth in today’s market. Our valuation
                   is based on real transaction data, buyer demand, and
@@ -330,7 +330,7 @@ const SellProperty = () => {
                   ].map((point, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-3 text-white/90"
+                      className="flex items-start gap-3 text-[var(--text-muted)]"
                     >
                       <span className="mt-1 w-1.5 h-1.5 rounded-full bg-[var(--primary-color)]" />
                       <span>{point}</span>

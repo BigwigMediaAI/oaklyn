@@ -124,8 +124,8 @@ export default function PropertyCategoriesHover() {
                       className={`w-full text-left px-4 py-3 sm:px-6 sm:py-4 border transition-all duration-300
               ${
                 active === i
-                  ? "border-[var(--secondary-color)] bg-[var(--primary-bg)]"
-                  : "border-[var(--border-color)] hover:bg-[var(--primary-bg)]"
+                  ? "border-[var(--secondary-color)] bg-[var(--primary-color)]"
+                  : "border-[var(--border-color)] hover:bg-[var(--primary-color)]"
               }
             `}
                     >

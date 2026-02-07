@@ -293,11 +293,11 @@ export default function HeroSlider() {
             </div>
 
             {/* RIGHT — PHILOSOPHY CARD */}
-            <div className="relative p-12 bg-[#1F3D2B] shadow-2xl border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl">
+            <div className="relative p-12 shadow-2xl border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl">
               {/* Accent line */}
               <span className="absolute left-0 top-8 h-16 w-1 bg-[#E0B15C] rounded"></span>
 
-              <h3 className="text-2xl font-bold font-heading tracking-widest text-white mb-8">
+              <h3 className="text-2xl font-bold font-heading tracking-widest  mb-8">
                 Our Philosophy
               </h3>
 
@@ -308,7 +308,7 @@ export default function HeroSlider() {
                   "Client-first advisory approach",
                   "Long-term value, not short-term sales",
                 ].map((item, index) => (
-                  <li key={index} className="flex gap-4  text-white">
+                  <li key={index} className="flex gap-4  ">
                     <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#E0B15C]"></span>
                     {item}
                   </li>

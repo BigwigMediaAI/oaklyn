@@ -42,7 +42,7 @@ const LanguageSelector = () => {
       value={lang}
       onChange={handleLanguageChange}
       title="Select language"
-      className="language-selector appearance-none bg-[var(--primary-bg)]  w-12 p-2 rounded-full text-center cursor-pointer"
+      className="language-selector appearance-none bg-[var(--primary-bg)]/40 rounded-full text-center cursor-pointer"
     >
       <option value="" disabled title="Language">
         🌐

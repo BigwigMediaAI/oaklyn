@@ -7,7 +7,7 @@
 ===================== */
 :root {
   /* BRAND COLORS */
-  --primary-bg: #1f3d2b; /* Deep Forest Green */
+  --primary-bg: #0f0f0f; /* Deep Forest Green */
   --secondary-bg: #ffffff; /* Light Background */
 
   --primary-color: #c9a24d; /* Luxury Gold */
@@ -29,7 +29,7 @@
 
 .dark {
   /* BACKGROUNDS */
-  --primary-bg: #1f3d2b; /* Dark Forest */
+  --primary-bg: #0f0f0f; /* Dark Forest */
   --secondary-bg: #050807; /* Near Black */
 
   /* BRAND COLORS (slightly brighter for contrast) */

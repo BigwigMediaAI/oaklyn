@@ -13,7 +13,7 @@ import Link from "next/link";
 
 export default function MiniNavbar() {
   return (
-    <div className="hidden md:block w-full bg-[var(--primary-bg)] text-white text-sm">
+    <div className="hidden md:block w-full  text-sm">
       <div className="w-11/12 mx-auto flex items-center justify-between py-3">
         {/* LEFT — LOCATION | PHONE */}
         <div className="flex items-center">

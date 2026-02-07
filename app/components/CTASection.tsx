@@ -55,7 +55,7 @@ export default function CTASection() {
                 text-[var(--primary-color)]
                 font-body font-semibold
                 transition
-                hover:bg-[var(--hover-bg)]
+                hover:bg-[var(--primary-color)]
                 hover:text-white
               "
             >

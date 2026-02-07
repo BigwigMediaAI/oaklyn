@@ -14,7 +14,7 @@ const PopupForm: React.FC<PopupFormProps> = ({ open, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center  backdrop-blur-md animate-fadeIn">
-      <div className="relative w-11/12 max-w-4xl bg-[var(--primary-bg)]  backdrop-blur-xl rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.15)] border border-white/30 animate-popupSlide overflow-hidden flex flex-col md:flex-row">
+      <div className="relative w-11/12 max-w-4xl bg-[var(--primary-bg)]/40  backdrop-blur-xl rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.15)] border border-white/30 animate-popupSlide overflow-hidden flex flex-col md:flex-row">
         {/* CLOSE */}
         <button
           onClick={onClose}
