@@ -10,6 +10,7 @@ import {
   Youtube,
 } from "lucide-react";
 import Link from "next/link";
+import { BiMobile } from "react-icons/bi";
 
 export default function MiniNavbar() {
   return (
@@ -25,6 +26,11 @@ export default function MiniNavbar() {
           {/* DIVIDER */}
           <span className="mx-4 h-4 w-px bg-white/30" />
 
+          <div className="flex items-center gap-2">
+            <BiMobile size={14} />
+            <span>+971 585835230</span>
+          </div>
+          <span className="mx-4 h-4 w-px bg-white/30" />
           <div className="flex items-center gap-2">
             <Phone size={14} />
             <span>042863789</span>

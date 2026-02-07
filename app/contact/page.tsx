@@ -11,7 +11,7 @@ import { MapPin, Phone, Mail } from "lucide-react";
 import Footer from "../components/Footer";
 import EnquiryForm from "../components/EnquiryForm";
 import MiniNavbar from "../components/Mininavbar";
-
+import { BiMobile } from "react-icons/bi";
 
 const Contact = () => {
   /* ================= AOS INIT ================= */
@@ -89,6 +89,11 @@ const Contact = () => {
                     </p>
                   </div>
 
+                  {/* Mobile */}
+                  <div className="flex gap-4 items-start">
+                    <BiMobile className="text-[var(--primary-color)] mt-1 shrink-0" />
+                    <p className="leading-relaxed">+971 585835230</p>
+                  </div>
                   {/* PHONE */}
                   <div className="flex gap-4 items-start">
                     <Phone className="text-[var(--primary-color)] mt-1 shrink-0" />

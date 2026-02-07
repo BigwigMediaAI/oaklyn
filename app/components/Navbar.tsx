@@ -10,6 +10,7 @@ import ButtonFill from "./Button";
 import PopupForm from "./Popup";
 import ThemeSliderToggle from "./Theme-toggle";
 import LanguageSelector from "./LanguageSelector";
+import { BiMobileAlt } from "react-icons/bi";
 
 declare global {
   interface Window {
@@ -269,9 +270,12 @@ export default function Navbar() {
             <Link href="/contact" onClick={() => setOpen(false)}>
               Contact
             </Link>
-
-            {/* PHONE */}
             <div className="mt-8 flex items-center gap-3 text-sm border-t border-white/20 pt-4">
+              <BiMobileAlt size={16} />
+              <span>+971 585835230</span>
+            </div>
+            {/* PHONE */}
+            <div className=" flex items-center gap-3 text-sm ">
               <Phone size={16} />
               <span>042863789</span>
             </div>
