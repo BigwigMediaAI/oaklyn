@@ -5,9 +5,10 @@ import Link from "next/link";
 import { useEffect, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import hero1 from "../../assets/hero/hero4.jpg";
-import hero2 from "../../assets/hero/hero5.jpg";
-import hero3 from "../../assets/hero/hero6.jpg";
+import hero1 from "../../assets/hero/h1.png";
+import hero2 from "../../assets/hero/h2.png";
+import hero3 from "../../assets/hero/h3.png";
+import hero4 from "../../assets/hero/h4.png";
 import PopupForm from "../Popup";
 
 const slides = [
@@ -28,6 +29,12 @@ const slides = [
     tag: "Trusted Developments",
     title: "Invest with Confidence\nLive with Pride",
     desc: "A portfolio of verified projects across the most promising destinations.",
+  },
+  {
+    image: hero4,
+    tag: "Luxury Living",
+    title: "Designed for Comfort\nBuilt for the Future",
+    desc: "Thoughtfully planned residences offering lifestyle, security, and long-term value.",
   },
 ];
 
@@ -69,7 +76,7 @@ export default function HeroSlider() {
           />
 
           {/* DARK OVERLAY */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/45 to-black/25 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-black/45 " />
 
           {/* LIGHT SWEEP TRANSITION */}
           <div
